@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+
+<body>
+<font size="14">
+	     <center> Bible visualization </center>
+</body>
+
+
 <style>
 
 .node {
@@ -12,20 +19,27 @@
   stroke-opacity: .8;
 }
 
+.text {
+  font: 10px sans-serif;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+
 </style>
 <body>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 
-var width = 1600,
-    height = 900;
+var width = 1440,
+    height = 800;
 
 var color = d3.scale.linear()
 			.domain([0,65])
 			.range(["blue","red"]);
 
 var force = d3.layout.force()
-    .charge(-500)
+    .charge(-550)
     .linkDistance(20)
     .gravity(0.1)
     .size([width, height])
@@ -48,21 +62,27 @@ d3.json("newest.json", function(error, graph) {
     .enter().append("line")
       .attr("class", "link")
       .style("stroke-width", function(d) { return Math.log(d.value)/10; });
-	function dblclick(path){
+
+function dblclick(path){
 		window.location.assign(path, '_blank');
 	 }
+  
+  var nodesize=16
   var node = svg.selectAll(".node")
       .data(graph.nodes)
     .enter().append("circle")
       .attr("class", "node")
-      .attr("r", function(d) { return Math.sqrt(d.size)/20; })
+      .attr("r", function(d) { return Math.sqrt(d.size)/nodesize;})
       .style("fill", function(d) { return color(d.group); })
       .call(force.drag)
       .on("dblclick", function(d) { return dblclick(d.wiki); });
 
-  node.append("title")
-      .text(function(d) { return d.name; });
-      
+
+  var text = svg.selectAll(".text")
+      .data(graph.nodes)
+      .enter().append("text")
+      .attr("class", "text")
+      .text( function(d) { return d.name});  
 
   force.on("tick", function() {
     link.attr("x1", function(d) { return d.source.x; })
@@ -72,6 +92,9 @@ d3.json("newest.json", function(error, graph) {
 
     node.attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
+        
+     text.attr("x", function(d) { return d.x+Math.sqrt(d.size)/nodesize; })
+        .attr("y", function(d) { return d.y; });
   });
 });
 

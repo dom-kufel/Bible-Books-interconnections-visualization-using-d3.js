@@ -61,7 +61,7 @@ for j in range(0,len(listalist)-1):
     filer.write(",")
     filer.write('"group"')
     filer.write(":")
-    filer.write(str(j*j))
+    filer.write(str(j))
     filer.write(",")
     filer.write('"size"')
     filer.write(":")
