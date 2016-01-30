@@ -36,11 +36,15 @@ j=0
 licznik=0
 #stad numeracja ksiag w j od 1
 for i in range(len(lista1)):
-    if lista1[i]!=lista1[i-1]:
-        j+=1
-        licznik=0
-    listalist[j].append(lista2[i])
-    licznik+=1    
+	if i==0:
+		listalist[j].append(lista2[i])
+		licznik+=1
+	else:
+	    if lista1[i]!=lista1[i-1]:
+	        j+=1
+	        licznik=0
+	    listalist[j].append(lista2[i])
+	    licznik+=1    
 #print listalist[1]
 filer=open("newest.json",'w')
 filer.write("{")
@@ -87,8 +91,7 @@ for j in range(0,len(listalist)-1):
     cnt=collections.Counter()
     for word in listalist[j]:
         cnt[word] +=1
-    level=list(cnt.items())
-    #try:    
+    level=list(cnt.items())    
     poziom=15
     if len(level)-1<poziom:
         wartosc=len(level)-1
@@ -118,17 +121,9 @@ for j in range(0,len(listalist)-1):
         
         #print cnt
     print "\n" 
-    #except:
-    #    pass
 
 filer.write("\n")
 filer.write("]")
 filer.write("\n")
 filer.write("}")
 
-#chronologiczna koljenosc, to rozny kolor,
-#albo rozdziel na kolory NT i ST ^ da sie polaczyc
-#im wiecej polaczen miedzy soba tym wieksze
-#dobrac sily
-#skierowany graf
-#albo dlugosc ksiazki jako wielkosc
