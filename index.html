@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 
-<body>
-<font size="14">
-	     <center> Bible visualization </center>
-</body>
+<title>
+	     Bible Visualization
+</title>
+<body style="background-image:url(http://www.wppga.org/wp-content/uploads/2012/08/background-sky.png"></body>
 
 
 <style>
@@ -16,7 +16,7 @@
 
 .link {
   stroke: #999;
-  stroke-opacity: .8;
+  stroke-opacity: .85;
 }
 
 .text {
@@ -31,8 +31,8 @@
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 
-var width = 1440,
-    height = 800;
+var width = 1550,
+    height = 750;
 
 var color = d3.scale.linear()
 			.domain([0,65])
@@ -98,5 +98,15 @@ function dblclick(path){
   });
 });
 
-</script>
 
+
+</script>
+</body>
+
+<p style="color:black;"> 1. Density of nodes represent how strong connection is with one Bible book and others. This can be easily seen, when trying to drag one of the nodes of the graph and looking what is happening with the others. For example try to drag <i> The Book of Psalms </i> and compare it with dragging <i> First Epistle to the Corinthians </i></p>
+<p style="color:black;"> 2. Color of the nodes represent the chronology of the Bible books. If the book is more red, then it means that it is younger: as we can see the "most red" book is <i>The Revelation.</i>
+<p style="color:black;"> 3. The size of the node is dependent how long (in words) is selected Bible book. </p>
+<p style="color:black;"> 4. After double click on node, associated wikipedia page opens. </p>
+<p style="color:darkblue;">  If you have any additional questions, please do not hestitate to contact me at <i>dominic.kufel@gmail.com</i> </p>
+
+</html>
